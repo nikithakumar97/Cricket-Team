@@ -9,7 +9,7 @@ const sqlite3 = require("sqlite3");
 app.use(express.json());
 const dbPath = path.join(__dirname,"cricketTeam.db");
 
-let db - null;
+let db = null;
 
 const initializeDBAndServer = async()=>{
     try{
@@ -58,10 +58,10 @@ app.post("/players/",async(request,response)=>{
     const addPlayerQuery = `
     INSERT INTO
     cricket_team(player_name,jersey_number,role)
-    VALUES
+    VALUES`
     (`${playerName}`,
     `${jerseyNumber}`,
-    `${role}`);`;
+    `${role}`);`;`
 
     const dbResponse = await db.run(addPlayerQuery);
     response.send("Player Added to Team")
@@ -69,8 +69,8 @@ app.post("/players/",async(request,response)=>{
 
 app.get("/players/:playerId",async(request,response)=>{
     const {playerId} = request.params;
-    const getPlayerQuery = `
-    SELECT * FROM cricket_team WHERE player_id = ${player_id}`;
+    const getPlayerQuery = 
+    SELECT * FROM cricket_team WHERE player_id = `${player_id}`;
     const player = await db.get(getPlayerQuery);
     response.send(convertDbObjectToResponseObject(player));
 
@@ -88,7 +88,7 @@ app.put("/players/:playerId",async(request,response)=>{
     jersey_number = ${jerseyNumber},
     role = ${role}
     WHERE 
-    player_id = ${playerId};`;
+    player_id = ${playerId}`;;
         await db.run(updatePlayerQuery);
         response.send("Player details Updated")
 });
